@@ -14,6 +14,9 @@ class Day06(input: List<String>) {
         return countWays(time, dist)
     }
 
+    /**
+     * Alternatively, solve this inequality: x^2 - xt + d < 0, where t is the time and d is the distance.
+     */
     private fun countWays(time: Long, dist: Long): Int {
         return (1..time).count { remaining -> remaining * (time - remaining) > dist }
     }
