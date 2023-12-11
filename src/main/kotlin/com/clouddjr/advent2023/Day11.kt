@@ -22,14 +22,14 @@ class Day11(private val input: List<String>) {
         }
 
         val galaxies = input.flatMapIndexed { rowIdx, row ->
-            row.mapIndexed { colIdx, c ->
+            row.mapIndexedNotNull { colIdx, c ->
                 if (c == '#') {
                     Point2D(
                         x = colIdx + sumCols[colIdx] * (expandBy - 1),
                         y = rowIdx + sumRows[rowIdx] * (expandBy - 1)
                     )
                 } else null
-            }.filterNotNull()
+            }
         }
 
         return (0..<galaxies.size - 1).sumOf { i ->
