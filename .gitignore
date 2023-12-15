@@ -37,3 +37,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### AoC input files ###
+src/main/resources/*.txt
