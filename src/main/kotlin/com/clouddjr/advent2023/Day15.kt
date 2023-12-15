@@ -8,7 +8,7 @@ class Day15(input: String) {
     }
 
     fun solvePart2(): Int {
-        val boxes = List(256) { mutableMapOf<String, Lens>() }
+        val boxes = List(256) { mutableMapOf<String, Int>() }
 
         steps.forEach { step ->
             when {
@@ -20,17 +20,15 @@ class Day15(input: String) {
                 "=" in step -> {
                     val label = step.substringBefore("=")
                     val length = step.substringAfter("=").toInt()
-                    boxes[label.hash()][label] = Lens(label, length)
+                    boxes[label.hash()][label] = length
                 }
             }
         }
 
         return boxes.withIndex().sumOf { (i, box) ->
-            box.values.withIndex().sumOf { (j, lens) -> (i + 1) * (j + 1) * lens.focalLength }
+            box.values.withIndex().sumOf { (j, focalLength) -> (i + 1) * (j + 1) * focalLength }
         }
     }
 
     private fun String.hash(): Int = this.fold(0) { acc, c -> (acc + c.code) * 17 % 256 }
-
-    private data class Lens(val label: String, val focalLength: Int)
 }
