@@ -19,3 +19,7 @@ data class Point2D(val x: Int, val y: Int) {
         val WEST = Point2D(-1, 0)
     }
 }
+
+operator fun Collection<Collection<Any>>.contains(point: Point2D): Boolean {
+    return point.y in indices && point.x in first().indices
+}
