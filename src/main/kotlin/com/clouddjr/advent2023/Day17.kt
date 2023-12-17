@@ -1,7 +1,6 @@
 package com.clouddjr.advent2023
 
 import com.clouddjr.advent2023.utils.Point2D
-import com.clouddjr.advent2023.utils.contains
 import java.util.PriorityQueue
 
 class Day17(input: List<String>) {
@@ -41,7 +40,7 @@ class Day17(input: List<String>) {
             }
 
             current.state.next(minBlocks, maxBlocks)
-                .filter { it.point in grid }
+                .filter { it.point.y in grid.indices && it.point.x in grid.first().indices }
                 .forEach { next ->
                     val newCost = current.cost + grid[next.point.y][next.point.x]
                     if (newCost < costs.getValue(next)) {
