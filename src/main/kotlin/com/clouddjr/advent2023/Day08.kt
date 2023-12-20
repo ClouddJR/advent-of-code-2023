@@ -1,5 +1,7 @@
 package com.clouddjr.advent2023
 
+import com.clouddjr.advent2023.utils.lcm
+
 class Day08(input: List<String>) {
     private val dirs = input.first.map { if (it == 'L') 0 else 1 }
 
@@ -28,10 +30,4 @@ class Day08(input: List<String>) {
 
         return steps
     }
-
-    private fun List<Long>.lcm() = reduce { a, b -> lcm(a, b) }
-
-    private fun lcm(a: Long, b: Long): Long = (a * b) / gcd(a, b)
-
-    private fun gcd(a: Long, b: Long): Long = if (a == 0L) b else gcd(b % a, a)
 }
