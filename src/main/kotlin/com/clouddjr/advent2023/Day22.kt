@@ -28,8 +28,7 @@ class Day22(input: List<String>) {
     }
 
     fun solvePart1(): Int {
-        val nonDisintegrated = supports.count { (_, others) -> others.any { other -> supported.getValue(other).size == 1 } }
-        return bricks.size - nonDisintegrated
+        return bricks.size - supported.values.filter { it.size == 1 }.map { it.toSet() }.reduce(Set<Int>::union).size
     }
 
     fun solvePart2(): Int {
@@ -42,8 +41,8 @@ class Day22(input: List<String>) {
                     for (next in nextBricks) {
                         if ((supported.getValue(next) - falling).isEmpty()) {
                             falling += next
+                            addAll(supports.getOrDefault(next, emptySet()))
                         }
-                        addAll(supports.getOrDefault(next, emptySet()))
                     }
                 }
             }
