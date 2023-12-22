@@ -1,5 +1,7 @@
 package com.clouddjr.advent2023
 
+import com.clouddjr.advent2023.utils.size
+
 class Day19(input: String) {
     private val workflows = input.substringBefore("\n\n").lines().map { Workflow.from(it) }.associateBy { it.name }
     private val ratings = input.substringAfter("\n\n").lines().map { Rating.from(it) }
@@ -108,8 +110,6 @@ class Day19(input: String) {
             }
         }
     }
-
-    private fun IntRange.size() = last - start + 1
 
     private fun IntRange.merge(other: IntRange) = (maxOf(first, other.first)..minOf(last, other.last))
 }
